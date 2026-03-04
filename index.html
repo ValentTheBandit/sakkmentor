@@ -1,44 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Responsive Navbar</title>
-
-<!-- Hamburger ikon -->
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tanuló Portfólió – Responsive Navbar</title>
+  <meta name="description" content="Mini tanuló portfólió oldal modern responsive navbar-ral és hamburger menüvel." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- Header / Navbar -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Fő navigáció">
+      <a class="brand" href="#top" aria-label="Ugrás a tetejére">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>ProbaName</span>
+      </a>
 
-<h2>Responsive Navbar</h2>
-<p>Resize the browser window to see the effect.</p>
+      <button class="burger" id="burger"
+        aria-label="Menü megnyitása"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
 
-<div class="topnav" id="myTopnav">
+      <div class="links" id="navLinks">
+        <a href="#cel">Cél</a>
+        <a href="#projektek">Projektek</a>
+        <a href="#terv">Terv</a>
+        <a href="#kapcsolat" class="cta">Kapcsolat</a>
+      </div>
+    </nav>
+  </header>
 
-<a href="#home" class="active">Home</a>
-<a href="#news">News</a>
-<a href="#contact">Contact</a>
-<a href="#about">About</a>
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="pill">🚀 Mini projekt: modern responsive navbar</p>
+        <h1>Tanuló portfólió oldal</h1>
+        <p class="lead">
+          Egy egyszerű, de “profi hatású” landing page, ahol bemutathatod a projektjeidet,
+          a céljaidat és azt, min dolgozol épp.
+        </p>
 
-<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-<i class="fa fa-bars"></i>
-</a>
+        <div class="hero-actions">
+          <a class="btn primary" href="#projektek">Nézd meg a projekteket</a>
+          <a class="btn ghost" href="#terv">Tanulási terv</a>
+        </div>
 
-</div>
+        <div class="stats" role="list">
+          <div class="stat" role="listitem">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Mini projekt</span>
+          </div>
+          <div class="stat" role="listitem">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Szekció</span>
+          </div>
+          <div class="stat" role="listitem">
+            <span class="stat-num">1</span>
+            <span class="stat-label">Responsive navbar</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div style="padding:16px">
-<h3>Hamburger Menu</h3>
-<p>This navbar becomes responsive on small screens.</p>
-</div>
+    <!-- Cél -->
+    <section class="section" id="cel">
+      <div class="container">
+        <h2>Cél</h2>
+        <p>
+          Ennek az oldalnak a célja, hogy legyen egy “otthonod” a projektjeidnek. Itt tudod:
+        </p>
 
-<script src="script.js"></script>
+        <div class="grid">
+          <article class="card">
+            <h3>✅ Bemutatkozás</h3>
+            <p>Ki vagy, mit tanulsz, és mi érdekel a frontendben.</p>
+          </article>
+          <article class="card">
+            <h3>🧩 Projektek</h3>
+            <p>Navbar, űrlap, galéria, mini játékok — mind jöhet ide.</p>
+          </article>
+          <article class="card">
+            <h3>📈 Haladás</h3>
+            <p>Követheted, mi van kész és mi a következő lépés.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- Projektek -->
+    <section class="section alt" id="projektek">
+      <div class="container">
+        <h2>Projektek</h2>
+        <p class="muted">Itt 3 példa projekt kártya — később bővítheted.</p>
+
+        <div class="grid">
+          <article class="card">
+            <h3>1) Responsive Navbar</h3>
+            <p>Mobil menü, hamburger animáció, smooth scroll, aktív link jelölés.</p>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>2) űrlap validálás</h3>
+            <p>Email ellenőrzés, hibaüzenetek, “küldés” élmény.</p>
+            <div class="tags">
+              <span class="tag">Forms</span><span class="tag">UX</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>3) Képgaléria</h3>
+            <p>Rácsos elrendezés, modal megnyitás, billentyű navigáció.</p>
+            <div class="tags">
+              <span class="tag">Grid</span><span class="tag">Accessibility</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          Tipp: ha szeretnéd, később csinálunk “Projekt részletek” oldalt is (külön page).
+        </div>
+      </div>
+    </section>
+
+    <!-- Terv -->
+    <section class="section" id="terv">
+      <div class="container">
+        <h2>Tanulási terv (2 hét)</h2>
+        <ol class="timeline">
+          <li>
+            <strong>Nap 1–3:</strong> HTML struktúra + hozzáférhetőség (aria, fókusz)
+          </li>
+          <li>
+            <strong>Nap 4–7:</strong> CSS layout (flex, grid) + reszponzivitás
+          </li>
+          <li>
+            <strong>Nap 8–10:</strong> JS interakciók (menü, animáció, scroll)
+          </li>
+          <li>
+            <strong>Nap 11–14:</strong> Mini projekt: galéria vagy űrlap + deploy
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Kapcsolat -->
+    <section class="section alt" id="kapcsolat">
+      <div class="container">
+        <h2>Kapcsolat</h2>
+        <p class="muted">
+          Ez csak demo. Nyugodtan írd át saját elérhetőségekre.
+        </p>
+
+        <form class="form" onsubmit="return false;">
+          <label>
+            Név
+            <input type="text" placeholder="Pl. Alex" />
+          </label>
+
+          <label>
+            Üzenet
+            <textarea rows="4" placeholder="Mit szeretnél építeni legközelebb?"></textarea>
+          </label>
+
+          <button class="btn primary" type="button" id="fakeSend">Küldés (demo)</button>
+          <p class="form-hint" id="formHint" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> ProbaName</span>
+        <a href="#top">Vissza a tetejére ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
