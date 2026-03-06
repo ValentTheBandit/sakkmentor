@@ -65,13 +65,18 @@ if (yearEl) {
 }
 
 // ===== EmailJS =====
-const EMAILJS_PUBLIC_KEY = "OrJuLoNThQSnjJUBk";
-const EMAILJS_SERVICE_ID = "service_6s6nd4y";
-const EMAILJS_TEMPLATE_ID = "template_337cgpe";
+// ÍRD ÁT a saját adataidra
+const EMAILJS_PUBLIC_KEY = "IDE_A_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "IDE_A_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "IDE_A_TEMPLATE_ID";
 
-emailjs.init({
-  publicKey: EMAILJS_PUBLIC_KEY,
-});
+if (typeof emailjs !== "undefined") {
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY,
+  });
+} else {
+  console.error("EmailJS nincs betöltve.");
+}
 
 const form = document.getElementById("contactForm");
 const hint = document.getElementById("formHint");
@@ -87,7 +92,12 @@ if (form && hint && submitBtn) {
     const message = document.getElementById("message")?.value.trim();
 
     if (!name || !email || !selectedPackage) {
-      hint.textContent = "Kérlek töltsd ki a nevet, email címet és a választott csomagot.";
+      hint.textContent = "Kérlek töltsd ki a nevet, email címet és válassz csomagot.";
+      return;
+    }
+
+    if (typeof emailjs === "undefined") {
+      hint.textContent = "❌ Az EmailJS script nincs betöltve.";
       return;
     }
 
@@ -103,21 +113,72 @@ if (form && hint && submitBtn) {
       reply_to: email,
     };
 
+    console.log("=== EmailJS DEBUG START ===");
+    console.log("PUBLIC KEY:", EMAILJS_PUBLIC_KEY);
+    console.log("SERVICE ID:", EMAILJS_SERVICE_ID);
+    console.log("TEMPLATE ID:", EMAILJS_TEMPLATE_ID);
+    console.log("PARAMS:", templateParams);
+
     try {
-      await emailjs.send(
+      const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams
       );
 
+      console.log("✅ EmailJS siker:", response);
       hint.textContent = "✅ Sikeres jelentkezés! Hamarosan válaszolok.";
       form.reset();
     } catch (error) {
-      console.error("EmailJS hiba:", error);
-      hint.textContent = "❌ Hiba történt küldés közben. Ellenőrizd a kulcsokat és próbáld újra.";
+      console.error("❌ EmailJS teljes hiba objektum:", error);
+
+      let errorMessage = "Hiba történt küldés közben.";
+
+      if (error?.text) {
+        errorMessage += ` ${error.text}`;
+      }
+
+      if (error?.status) {
+        errorMessage += ` (Status: ${error.status})`;
+      }
+
+      if (error?.message) {
+        errorMessage += ` ${error.message}`;
+      }
+
+      hint.textContent = `❌ ${errorMessage}`;
+
+      // részletesebb bontás a console-ba
+      console.log("=== EmailJS ERROR DETAILS ===");
+      console.log("status:", error?.status);
+      console.log("text:", error?.text);
+      console.log("message:", error?.message);
+      console.log("name:", error?.name);
+
+      // gyakori hibák magyarázata
+      if (error?.text?.includes("Public Key")) {
+        console.warn("Valószínűleg hibás a PUBLIC KEY.");
+      }
+
+      if (error?.text?.includes("service ID")) {
+        console.warn("Valószínűleg hibás a SERVICE ID.");
+      }
+
+      if (error?.text?.includes("template ID")) {
+        console.warn("Valószínűleg hibás a TEMPLATE ID.");
+      }
+
+      if (error?.text?.includes("recipients address is empty")) {
+        console.warn("A template-ben a To Email nincs rendesen beállítva.");
+      }
+
+      if (error?.text?.includes("The user ID is required")) {
+        console.warn("A public key nincs megadva vagy hibás.");
+      }
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Jelentkezés elküldése";
+      console.log("=== EmailJS DEBUG END ===");
     }
   });
 }
