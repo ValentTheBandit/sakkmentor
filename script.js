@@ -65,9 +65,9 @@ if (yearEl) {
 }
 
 // ===== EmailJS =====
-const EMAILJS_PUBLIC_KEY = "IDE_A_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID = "IDE_A_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "IDE_A_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "OrJuLoNThQSnjJUBk";
+const EMAILJS_SERVICE_ID = "service_6s6nd4y";
+const EMAILJS_TEMPLATE_ID = "template_337cgpe";
 
 emailjs.init({
   publicKey: EMAILJS_PUBLIC_KEY,
