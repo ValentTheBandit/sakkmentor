@@ -190,23 +190,28 @@ if (form && hint && submitBtn) {
 // ===== Csomagkártya -> görgetés + automatikus kiválasztás =====
 const packageButtons = document.querySelectorAll(".package-cta");
 const contactSection = document.getElementById("kapcsolat");
+const nameInput = document.getElementById("name");
+const packageInput = document.getElementById("package");
 
 packageButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     e.preventDefault();
 
     const selectedPackage = button.dataset.package;
-    const radio = document.querySelector(`input[name="package"][value="${selectedPackage}"]`);
 
-    if (radio) {
-      radio.checked = true;
+    if (packageInput) {
+      packageInput.value = selectedPackage;
     }
 
     if (contactSection) {
       contactSection.scrollIntoView({
         behavior: "smooth",
-        block: "start"
+        block: "start",
       });
+    }
+
+    if (nameInput) {
+      setTimeout(() => nameInput.focus(), 350);
     }
   });
 });

@@ -186,7 +186,7 @@
               <li>Egymásra épülő kezdő házi feladat lista</li>
               <li>Ismeretek összefoglalása, (5.alkalom)</li>
             </ul>
-            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="Kezdo">Kérem</a>
+            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="Kezdő">Kérem</a>
           </article>
 
           <article class="price-card featured">
@@ -202,7 +202,7 @@
               <li>Egymásra épülő kezdő és középhaladó házifeladat lista</li>
               <li>Ismeretek összefoglalása(5. és 10.alkalom)</li>
             </ul>
-            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="KezdoKozepHalado">Kérem</a>
+            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="Kezdő-Középhaladó">Kérem</a>
           </article>
 
           <article class="price-card">
@@ -217,7 +217,7 @@
               <li>Középhaladó házifeladat lista</li></li>
               <li>Ismeretek összefoglalása (5. alkalom)</li>
             </ul>
-            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="KozepHalado">Kérem</a>
+            <a class="btn ghost full package-cta" href="#kapcsolat" data-package="Középhaladó">Kérem</a>
           </article>
         </div>
       </div>
@@ -240,8 +240,15 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="pl. adam@email.com" required />
 
-            <label for="email">Csomag</label>
-            <input type="package" id="package" name="csomag" placeholder="pl. Kezdő, Kezdő-Középhaladó, Középhaladó" required />
+            <label for="package">Csomag</label>
+            <input
+              type="text"
+              id="package"
+              name="package"
+              placeholder="pl. Kezdő, Kezdő-Középhaladó, Középhaladó"
+              required
+              readonly
+            />
 
             <label for="message">Megjegyzés</label>
             <textarea
