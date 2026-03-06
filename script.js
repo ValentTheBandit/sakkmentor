@@ -12,6 +12,10 @@ function setMenu(open) {
   burger.setAttribute("aria-label", open ? "Menü bezárása" : "Menü megnyitása");
 }
 
+if (typeof emailjs === "undefined") {
+  console.error("EmailJS nincs betöltve!");
+}
+
 if (burger && navLinks) {
   burger.addEventListener("click", () => {
     const open = !navLinks.classList.contains("is-open");
