@@ -240,15 +240,20 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="pl. adam@email.com" required />
 
-            <label for="package">Választott csomag</label>
-            <select id="package" name="package" required>
-              <option value="">Válassz csomagot</option>
-              <option value="Start">Start</option>
-              <option value="Haladás">Haladás</option>
-              <option value="Mentor">Mentor</option>
-            </select>
+            <div class="custom-select" id="packageSelect">
+              <div class="select-selected">Válassz csomagot</div>
+
+              <div class="select-options">
+                <div data-value="Start">Start</div>
+                <div data-value="Haladás">Haladás</div>
+                <div data-value="Mentor">Mentor</div>
+              </div>
+
+              <input type="hidden" id="package" name="package">
+            </div>
 
             <label for="message">Megjegyzés</label>
+            
             <textarea
               id="message"
               name="message"

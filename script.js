@@ -121,3 +121,27 @@ if (form && hint && submitBtn) {
     }
   });
 }
+
+const select = document.getElementById("packageSelect");
+const selected = select.querySelector(".select-selected");
+const options = select.querySelector(".select-options");
+const hiddenInput = document.getElementById("package");
+
+selected.addEventListener("click", () => {
+  options.style.display =
+    options.style.display === "block" ? "none" : "block";
+});
+
+options.querySelectorAll("div").forEach(option => {
+  option.addEventListener("click", () => {
+    selected.textContent = option.textContent;
+    hiddenInput.value = option.dataset.value;
+    options.style.display = "none";
+  });
+});
+
+document.addEventListener("click", (e) => {
+  if (!select.contains(e.target)) {
+    options.style.display = "none";
+  }
+});
