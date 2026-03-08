@@ -228,8 +228,7 @@
       <div class="container">
         <h2>Jelentkezés / Email</h2>
         <p class="muted">
-          Telefonon a legbiztosabb, ha a “Küldés emailben” gombot használod (megnyitja a levelezőt).
-          A form demo, de később összeköthetjük backenddel is.
+          Add meg az adataidat, a választott csomagot, és az első konzultációhoz javasolt időpontot.
         </p>
 
         <div class="contact-grid">
@@ -258,7 +257,9 @@
             ></textarea>
 
             <div class="form-actions">
-              <button class="btn primary" type="submit" id="submitBtn">Jelentkezés elküldése</button>
+              <button class="btn primary" type="submit" id="submitBtn">
+                Jelentkezés elküldése
+              </button>
             </div>
 
             <p class="form-hint" id="formHint" aria-live="polite"></p>
@@ -268,11 +269,23 @@
             <h3>Első konzultáció időpontja</h3>
 
             <label for="consultationDate">Válassz napot</label>
-            <input type="date" id="consultationDate" name="consultationDate" required />
+            <input
+              type="date"
+              id="consultationDate"
+              name="consultationDate"
+              form="contactForm"
+              required
+            />
 
             <label for="consultationTime">Írd be az időpontot</label>
-            <input type="text" id="consultationTime" name="consultationTime" placeholder="pl. 7:00 vagy 18:30" required />
-          
+            <input
+              type="text"
+              id="consultationTime"
+              name="consultationTime"
+              form="contactForm"
+              placeholder="pl. 7:00 vagy 18:30"
+              required
+            />
           </aside>
         </div>
       </div>

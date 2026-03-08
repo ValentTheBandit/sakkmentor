@@ -5,7 +5,6 @@ const linkEls = navLinks ? Array.from(navLinks.querySelectorAll("a")) : [];
 
 function setMenu(open) {
   if (!burger || !navLinks) return;
-
   burger.classList.toggle("is-open", open);
   navLinks.classList.toggle("is-open", open);
   burger.setAttribute("aria-expanded", open ? "true" : "false");
@@ -34,26 +33,21 @@ if (burger && navLinks) {
 
 // ===== Aktív menüpont görgetés alapján =====
 const sectionIds = ["miert", "terv", "csomagok", "kapcsolat"];
-const sections = sectionIds
-  .map((id) => document.getElementById(id))
-  .filter(Boolean);
+const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
 if (sections.length && linkEls.length) {
-  const io = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((en) => en.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  const io = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((en) => en.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-      if (!visible) return;
+    if (!visible) return;
 
-      const id = visible.target.id;
-      linkEls.forEach((a) => {
-        a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
-      });
-    },
-    { threshold: [0.25, 0.5, 0.75] }
-  );
+    const id = visible.target.id;
+    linkEls.forEach((a) => {
+      a.classList.toggle("active", a.getAttribute("href") === `#${id}`);
+    });
+  }, { threshold: [0.25, 0.5, 0.75] });
 
   sections.forEach((sec) => io.observe(sec));
 }
@@ -64,7 +58,7 @@ if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// ===== Csomagkártya -> görgetés + automatikus kiválasztás =====
+// ===== Csomagkártya -> görgetés + automatikus kitöltés =====
 const packageButtons = document.querySelectorAll(".package-cta");
 const contactSection = document.getElementById("kapcsolat");
 const nameInput = document.getElementById("name");
@@ -178,6 +172,11 @@ if (form && hint && submitBtn) {
       return;
     }
 
+    if (typeof emailjs === "undefined") {
+      hint.textContent = "❌ Az EmailJS script nincs betöltve.";
+      return;
+    }
+
     hint.textContent = "";
     submitBtn.disabled = true;
     submitBtn.textContent = "Küldés...";
@@ -186,7 +185,7 @@ if (form && hint && submitBtn) {
       name,
       email,
       package: selectedPackage,
-      consultation_date: consultationDate,
+      consultation_date: formatHungarianDate(consultationDate),
       consultation_time: consultationTime,
       message: message || "-",
       reply_to: email,
@@ -208,7 +207,6 @@ if (form && hint && submitBtn) {
       console.log("✅ EmailJS siker:", response);
       hint.textContent = "✅ Sikeres jelentkezés! Hamarosan válaszolok.";
       form.reset();
-      resetTimeOptions();
     } catch (error) {
       console.error("❌ EmailJS teljes hiba objektum:", error);
 
@@ -233,26 +231,6 @@ if (form && hint && submitBtn) {
       console.log("text:", error?.text);
       console.log("message:", error?.message);
       console.log("name:", error?.name);
-
-      if (error?.text?.includes("Public Key")) {
-        console.warn("Valószínűleg hibás a PUBLIC KEY.");
-      }
-
-      if (error?.text?.includes("service ID")) {
-        console.warn("Valószínűleg hibás a SERVICE ID.");
-      }
-
-      if (error?.text?.includes("template ID")) {
-        console.warn("Valószínűleg hibás a TEMPLATE ID.");
-      }
-
-      if (error?.text?.includes("recipients address is empty")) {
-        console.warn("A template-ben a To Email nincs rendesen beállítva.");
-      }
-
-      if (error?.text?.includes("The user ID is required")) {
-        console.warn("A public key nincs megadva vagy hibás.");
-      }
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Jelentkezés elküldése";
@@ -260,18 +238,3 @@ if (form && hint && submitBtn) {
     }
   });
 }
-
-/* Date*/
-console.log("DÁTUM:", consultationDate);
-console.log("IDŐ:", consultationTime);
-
-function formatHungarianDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("hu-HU", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-consultation_date: formatHungarianDate(consultationDate),
