@@ -165,7 +165,7 @@ if (form && hint && submitBtn) {
     const email = document.getElementById("email")?.value.trim();
     const selectedPackage = document.getElementById("package")?.value.trim();
     const consultationDate = document.getElementById("consultationDate")?.value;
-    const consultationTime = document.getElementById("consultationTime")?.value;
+    const consultationTime = document.getElementById("consultationTime")?.value.trim();
     const message = document.getElementById("message")?.value.trim();
 
     if (!name || !email || !selectedPackage || !consultationDate || !consultationTime) {
@@ -186,7 +186,7 @@ if (form && hint && submitBtn) {
       name,
       email,
       package: selectedPackage,
-      consultation_date: formatHungarianDate(consultationDate),
+      consultation_date: consultationDate,
       consultation_time: consultationTime,
       message: message || "-",
       reply_to: email,
@@ -260,3 +260,18 @@ if (form && hint && submitBtn) {
     }
   });
 }
+
+/* Date*/
+console.log("DÁTUM:", consultationDate);
+console.log("IDŐ:", consultationTime);
+
+function formatHungarianDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("hu-HU", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+consultation_date: formatHungarianDate(consultationDate),
