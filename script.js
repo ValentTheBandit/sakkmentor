@@ -182,8 +182,8 @@ if (form && hint && submitBtn) {
     submitBtn.textContent = "Küldés...";
 
     const templateParams = {
-      name,
-      email,
+      name: name,
+      email: email,
       package: selectedPackage,
       consultationDate: formatHungarianDate(consultationDate),
       consultationTime: consultationTime,
@@ -191,14 +191,12 @@ if (form && hint && submitBtn) {
       reply_to: email,
     };
 
-    console.log("DÁTUM:", consultationDate);
-    console.log("IDŐ:", consultationTime);
-    console.log("PARAMS:", templateParams);
-
     console.log("=== EmailJS DEBUG START ===");
     console.log("PUBLIC KEY:", EMAILJS_PUBLIC_KEY);
     console.log("SERVICE ID:", EMAILJS_SERVICE_ID);
     console.log("TEMPLATE ID:", EMAILJS_TEMPLATE_ID);
+    console.log("DÁTUM:", consultationDate);
+    console.log("IDŐ:", consultationTime);
     console.log("PARAMS:", templateParams);
 
     try {
@@ -229,12 +227,6 @@ if (form && hint && submitBtn) {
       }
 
       hint.textContent = `❌ ${errorMessage}`;
-
-      console.log("=== EmailJS ERROR DETAILS ===");
-      console.log("status:", error?.status);
-      console.log("text:", error?.text);
-      console.log("message:", error?.message);
-      console.log("name:", error?.name);
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Jelentkezés elküldése";
