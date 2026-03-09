@@ -235,3 +235,23 @@ if (form && hint && submitBtn) {
   });
 }
 
+const dateInputWrap = document.getElementById("dateInputWrap");
+
+if (dateInputWrap && consultationDateInput) {
+  dateInputWrap.addEventListener("click", () => {
+    if (typeof consultationDateInput.showPicker === "function") {
+      consultationDateInput.showPicker();
+    } else {
+      consultationDateInput.focus();
+      consultationDateInput.click();
+    }
+  });
+}
+
+if (consultationDateInput) {
+  consultationDateInput.addEventListener("click", () => {
+    if (typeof consultationDateInput.showPicker === "function") {
+      consultationDateInput.showPicker();
+    }
+  });
+}
