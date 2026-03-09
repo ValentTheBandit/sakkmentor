@@ -236,7 +236,6 @@ if (form && hint && submitBtn) {
 }
 
 const dateInputWrap = document.getElementById("dateInputWrap");
-const consultationDateInput = document.getElementById("consultationDate");
 
 if (dateInputWrap && consultationDateInput) {
   dateInputWrap.addEventListener("click", () => {
